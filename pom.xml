@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>xin.spring.bless.fast</groupId>
+  <artifactId>fdfs-client</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0-SNAPSHOT</version>
+
+  <name>fdfs</name>
+  <url>http://www.example.com</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <fastdfs.version>1.27.0.0</fastdfs.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- fastdfs-cli -->
+    <!-- https://mvnrepository.com/artifact/net.oschina.zcx7878/fastdfs-client-java -->
+    <dependency>
+      <groupId>net.oschina.zcx7878</groupId>
+      <artifactId>fastdfs-client-java</artifactId>
+      <version>${fastdfs.version}</version>
+<!--      <scope>compile</scope>-->
+    </dependency>
+
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt</artifactId>
+      <version>0.9.1</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.auth0/java-jwt -->
+<!--    <dependency>-->
+<!--      <groupId>com.auth0</groupId>-->
+<!--      <artifactId>java-jwt</artifactId>-->
+<!--      <version>3.4.0</version>-->
+<!--    </dependency>-->
+    <dependency>
+      <groupId>xin.spring.bless.fast</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.22.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.7.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-project-info-reports-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <!-- 阿里云云效私服 -->
+  <distributionManagement>
+    <repository>
+      <id>rdc-releases</id>
+      <url>https://repo.rdc.aliyun.com/repository/129899-release-FVjCSk/</url>
+    </repository>
+    <snapshotRepository>
+      <id>rdc-snapshots</id>
+      <url>https://repo.rdc.aliyun.com/repository/129899-snapshot-HFfM0P/</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+</project>
