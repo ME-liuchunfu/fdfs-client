@@ -8,11 +8,14 @@ package xin.spring.bless.fast.service;
 public interface DownLoadProgress {
 
     /**
-     * 上传进度
+     * 方法描述： 上传进度
+     *       数据从0开始，读取到readLen长度，存储在datas数组
+     * @param datas  读取字节数组
+     * @param readLen  读取长度
      * @param current  当前进度
      * @param totle  总数目
      * @param finish  true完成，false未完成
      */
-    void progress(long current, long totle, boolean finish);
+    void progress(byte[] datas,long readLen,long current, long totle, boolean finish);
 
 }

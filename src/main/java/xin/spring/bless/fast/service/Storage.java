@@ -1,10 +1,8 @@
 package xin.spring.bless.fast.service;
 
 import xin.spring.bless.fast.pojo.StorageInfo;
-
 import java.io.File;
 import java.io.InputStream;
-import java.io.OutputStream;
 
 /**
  * 描述，节点服务接口
@@ -20,21 +18,21 @@ public interface Storage {
      * @param uploadFile 目标文件
      * @param progress 上传进度监听
      */
-    void upload(File uploadFile, UploadProgress progress);
+    String upload(File uploadFile, UploadProgress progress);
 
     /**
      * 方法描述： 文件上传
      * @param datas 目标文件
      * @param progress 上传进度监听
      */
-    void upload(byte[] datas, UploadProgress progress);
+    String upload(byte[] datas, UploadProgress progress);
 
     /**
      * 方法描述： 文件上传
      * @param inputStream 目标文件
      * @param progress 上传进度监听
      */
-    void upload(InputStream inputStream, UploadProgress progress);
+    String upload(InputStream inputStream, UploadProgress progress);
 
     /**
      * 方法描述： 文件上传
@@ -69,9 +67,9 @@ public interface Storage {
     /**
      * 方法描述： 文件下载
      * @param oid 文件标识
-     * @return outputstream
+     * @return InputStream
      */
-    OutputStream downloadStream(String oid);
+    InputStream downloadStream(String oid);
 
     /**
      * 方法描述： 文件下载

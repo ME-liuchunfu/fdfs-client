@@ -1,6 +1,8 @@
 package xin.spring.bless.fast.conf;
 
-import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import xin.spring.bless.fast.commons.lang.utils.FileUtil;
 import org.csource.fastdfs.ClientGlobal;
 import xin.spring.bless.fast.data.cache.DataCacheMemory;
 import xin.spring.bless.fast.factory.StorageFactory;
@@ -21,7 +23,18 @@ import java.util.Properties;
  */
 public class StorageGlobalConfig {
 
+    protected static final String CLASS_NAME = StorageGlobalConfig.class.getName();
+
+    protected static Logger logger = LoggerFactory.getLogger(StorageGlobalConfig.class);
+
     public StorageGlobalConfig(){}
+
+    /**
+     * 方法描述： 清除配置信息及内存缓存
+     */
+    public void clear() {
+        DataCacheMemory.get().clear();
+    }
 
     /**
      * 方法描述： 获取存储服务全局配置对象
@@ -37,6 +50,7 @@ public class StorageGlobalConfig {
      * @return
      */
     public Storage build(StorageMap properties) {
+        logger.info("初始化存储服务配置");
         Storage storage = null;
         if (Objects.isNull(properties)) {
             properties = defaultLocalProperties();
@@ -48,33 +62,43 @@ public class StorageGlobalConfig {
                     Properties pt = new Properties();
                     pt.putAll(properties);
                     ClientGlobal.initByProperties(pt);
+                    logger.info("存储服务为：{}模式", StorageType.FASTDFS);
                     break;
                 }
                 case StorageType.ALIYUN: {
+                    logger.info("存储服务为：{}模式", StorageType.FASTDFS);
                     break;
                 }
                 case StorageType.QCLOUD: {
+                    logger.info("存储服务为：{}模式", StorageType.QCLOUD);
                     break;
                 }
                 case StorageType.QINIU: {
+                    logger.info("存储服务为：{}模式", StorageType.QINIU);
                     break;
                 }
                 case StorageType.BAIDUYUN: {
+                    logger.info("存储服务为：{}模式", StorageType.BAIDUYUN);
                     break;
                 }
                 case StorageType.HUAWEIYUN: {
+                    logger.info("存储服务为：{}模式", StorageType.HUAWEIYUN);
                     break;
                 }
                 case StorageType.HDFS: {
+                    logger.info("存储服务为：{}模式", StorageType.HDFS);
                     break;
                 }
                 default: {
-                    FileUtils.forceMkdir(new File(properties.get(StorageType.LOCAL_PATH_KEY).toString()));
+                    FileUtil.forceMkdir(new File(properties.get(StorageType.LOCAL_PATH_KEY).toString()));
+                    logger.info("存储服务为：{}模式", StorageType.LOCAL);
                     break;
                 }
             }
             storage = StorageFactory.get().build(properties);
+            logger.info("正在缓存存储服务");
             DataCacheMemory.get().putService(Storage.class, storage);
+            logger.info("已缓存存储服务");
         } catch (Exception e) {
              e.printStackTrace();
         }
@@ -98,11 +122,11 @@ public class StorageGlobalConfig {
         StorageMap properties = StorageMap.get();
         int i = osServer();
         if (i == 1) {
-            properties.put("path", "C:"+File.separatorChar+"fast-storage"+File.separatorChar);
+            properties.put(StorageType.LOCAL_PATH_KEY, File.separatorChar+"fast-storage"+File.separatorChar);
         } else if (i == 2) {
-            properties.put("path", File.separatorChar+"fast-storage"+File.separatorChar);
+            properties.put(StorageType.LOCAL_PATH_KEY, "C:"+File.separatorChar+"fast-storage"+File.separatorChar);
         } else if (i == 3) {
-            properties.put("path", File.separatorChar+"fast-storage"+File.separatorChar);
+            properties.put(StorageType.LOCAL_PATH_KEY, File.separatorChar+"fast-storage"+File.separatorChar);
         }
         properties.put(StorageType.SERVER_KEY, StorageType.LOCAL);
         return properties;
@@ -133,6 +157,7 @@ public class StorageGlobalConfig {
         int i = 0;
         //当前系统名称
         String OS_NAME = System.getProperty("os.name").toLowerCase(Locale.US);
+        logger.info("当前环境为：{}", OS_NAME);
         if (OS_NAME.contains("windows")) {
             i = 2;
         } else if (OS_NAME.contains("linux")) {
@@ -143,11 +168,11 @@ public class StorageGlobalConfig {
         return i;
     }
 
-    public static void main(String[] args) {
-        //当前系统名称
-        String OS_NAME = System.getProperty("os.name").toLowerCase(Locale.US);
-        System.out.println(OS_NAME);
-    }
+//    public static void main(String[] args) {
+//        //当前系统名称
+//        String OS_NAME = System.getProperty("os.name").toLowerCase(Locale.US);
+//        System.out.println(OS_NAME);
+//    }
 
 }
 
