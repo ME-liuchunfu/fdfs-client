@@ -202,7 +202,19 @@ public class LocalStorageServiceImpl extends AbsStorageService{
 
     @Override
     public StorageInfo queryStorageInfo(String oid) {
-        return super.queryStorageInfo(oid);
+        String pref = getConfig().get(StorageType.LOCAL_PATH_KEY).toString();
+        File file = new File(pref, oid);
+        if (Objects.nonNull(file) && file.exists()) {
+            StorageInfo storageInfo = new StorageInfo();
+            storageInfo.setName(file.getName());
+            storageInfo.setUri(oid);
+            storageInfo.setStorageType(StorageType.LOCAL);
+            storageInfo.setSize(file.getTotalSpace());
+            storageInfo.setAbsPath(file.getAbsolutePath());
+            return storageInfo;
+        } else {
+            return null;
+        }
     }
 
     @Override
