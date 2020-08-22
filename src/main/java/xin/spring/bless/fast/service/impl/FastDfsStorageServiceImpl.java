@@ -3,17 +3,13 @@ package xin.spring.bless.fast.service.impl;
 import org.csource.common.MyException;
 import org.csource.common.NameValuePair;
 import org.csource.fastdfs.*;
+import xin.spring.bless.fast.commons.lang.utils.IOUtil;
 import xin.spring.bless.fast.conf.StorageType;
 import xin.spring.bless.fast.exception.FastDfsClientException;
 import xin.spring.bless.fast.pojo.StorageInfo;
 import xin.spring.bless.fast.service.DownLoadProgress;
-import xin.spring.bless.fast.service.Storage;
 import xin.spring.bless.fast.service.UploadProgress;
-
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Objects;
 
 /**
@@ -25,65 +21,7 @@ public class FastDfsStorageServiceImpl extends AbsStorageService{
 
     @Override
     public void init() {
-        String path = "";
-        try {
-            logger.info("创建TrackerClient创建客户端");
-            //创建客户端
-            TrackerClient tc = new TrackerClient();
-            //连接tracker Server
-            logger.info("创建TrackerServer创建客户端");
-            TrackerServer ts = tc.getConnection();
-            if (ts == null) {
-                logger.info("创建TrackerServer创建客户端 失败");
-                throw new FastDfsClientException("创建TrackerServer失败");
-            }
-            //获取一个storage server
-            logger.info("创建StorageServer创建客户端");
-            StorageServer ss = tc.getStoreStorage(ts);
-            if (ss == null) {
-                logger.info("创建StorageServer创建客户端 失败");
-                throw new FastDfsClientException("创建StorageServer失败");
-            }
-            //创建一个storage存储客户端
-            logger.info("创建一个storage存储客户端");
-            StorageClient1 sc1 = new StorageClient1(ts, ss);
-            NameValuePair[] meta_list = null; //new NameValuePair[0];
-            int i = path.lastIndexOf(".");
-            String subFix = path.substring(i + 1);
-            String fileId = sc1.upload_file1(path, subFix, meta_list);
-            logger.info("上传成功，远程节点地址：{}", fileId);
-        }catch (IOException e) {
-            logger.error("IOException FastDfsClient异常, {}", e.getMessage());
-            throw new FastDfsClientException("创建FastDfsClient IOException失败", e);
-        } catch (MyException e) {
-            logger.error("IOException FastDfsClient异常, {}", e.getMessage());
-            throw new FastDfsClientException("创建FastDfsClient MyException失败", e);
-        }
-    }
 
-    public void query() throws IOException, MyException {
-        logger.info("创建TrackerClient创建客户端");
-        //创建客户端
-        TrackerClient tc = new TrackerClient();
-        //连接tracker Server
-        logger.info("创建TrackerServer创建客户端");
-        TrackerServer ts = tc.getConnection();
-        if (ts == null) {
-            logger.info("创建TrackerServer创建客户端 失败");
-            throw new FastDfsClientException("创建TrackerServer失败");
-        }
-        //获取一个storage server
-        logger.info("创建StorageServer创建客户端");
-        StorageServer ss = tc.getStoreStorage(ts);
-        if (ss == null) {
-            logger.info("创建StorageServer创建客户端 失败");
-            throw new FastDfsClientException("创建StorageServer失败");
-        }
-        //创建一个storage存储客户端
-        logger.info("创建一个storage存储客户端");
-        StorageClient1 sc1 = new StorageClient1(ts, ss);
-        String fileId = "";
-        FileInfo fileInfo = sc1.get_file_info1(fileId);
     }
 
     /**
@@ -122,47 +60,171 @@ public class FastDfsStorageServiceImpl extends AbsStorageService{
 
     @Override
     public String upload(File uploadFile, UploadProgress progress) {
-        return super.upload(uploadFile, progress);
+        return this.upload(uploadFile, progress, null);
+    }
+
+    /**
+     * 方法描述： 带媒体方式上传文件
+     * @param uploadFile 待上传的文件
+     * @param progress 上传进度
+     * @param pairs 媒体类型
+     * @return 上传成功的oid
+     */
+    public String upload(File uploadFile, UploadProgress progress, NameValuePair ...pairs) {
+        try {
+            StorageClient1 sc1 = createStorageClient1();
+            String uuid = uuid() + uploadFile.getName().substring(uploadFile.getName().lastIndexOf(".")+1).toLowerCase();
+            NameValuePair[] valuePairs = null;
+            if (pairs != null && pairs.length > 0) {
+                valuePairs = pairs;
+            }
+            if (Objects.nonNull(progress)) {
+                progress.progress(0, uploadFile.getTotalSpace(), false, null);
+            }
+            String oid = sc1.upload_file1(uploadFile.getAbsolutePath(), uuid, valuePairs);
+            if (Objects.nonNull(progress)) {
+                progress.progress(uploadFile.getTotalSpace(), uploadFile.getTotalSpace(), true, oid);
+            }
+            logger.info("文件上传成功，路径{}", oid);
+            return oid;
+        } catch (IOException e) {
+            logger.error("IOException FastDfsClient异常, {}", e.getMessage());
+            throw new FastDfsClientException("IOException FastDfsClient异常, {}", e);
+        } catch (MyException e) {
+            logger.error("MyException FastDfsClient异常, {}", e.getMessage());
+            throw new FastDfsClientException("MyException FastDfsClient异常, {}", e);
+        }
     }
 
     @Override
     public String upload(byte[] datas, UploadProgress progress) {
-        return super.upload(datas, progress);
+        return this.upload(datas, null, progress);
     }
 
     @Override
     public String upload(byte[] datas, String subType, UploadProgress progress) {
-        return super.upload(datas, subType, progress);
+        return this.upload(datas, subType, progress, null);
+    }
+
+    /**
+     * 方法描述: 带媒体方式上传文件
+     * @param datas 文件byte数据
+     * @param subType 文件后缀
+     * @param progress 上传进度
+     * @param pairs 媒体类型
+     * @return 上传成功的oid
+     */
+    public String upload(byte[] datas, String subType, UploadProgress progress, NameValuePair ...pairs) {
+        try {
+            StorageClient1 sc1 = createStorageClient1();
+            String uuid = uuid();
+            NameValuePair[] valuePairs = null;
+            if (pairs != null && pairs.length > 0) {
+                valuePairs = pairs;
+            }
+            if (Objects.nonNull(progress)) {
+                progress.progress(0, datas.length, false, null);
+            }
+            String oid = sc1.upload_file1(datas, uuid, valuePairs);
+            if (Objects.nonNull(progress)) {
+                progress.progress(datas.length, datas.length, true, oid);
+            }
+            logger.info("文件上传成功，路径{}", oid);
+            return oid;
+        } catch (IOException e) {
+            logger.error("IOException FastDfsClient异常, {}", e.getMessage());
+            throw new FastDfsClientException("IOException FastDfsClient异常, {}", e);
+        } catch (MyException e) {
+            logger.error("MyException FastDfsClient异常, {}", e.getMessage());
+            throw new FastDfsClientException("MyException FastDfsClient异常, {}", e);
+        }
     }
 
     @Override
     public String upload(InputStream inputStream, UploadProgress progress) {
-        return super.upload(inputStream, progress);
+        return this.upload(inputStream, null, progress);
     }
 
     @Override
-    public String upload(InputStream inputStream, String subType, UploadProgress progress) {
-        return super.upload(inputStream, subType, progress);
+    public String upload(InputStream inputStream, String fileSize, UploadProgress progress) {
+        return this.upload(inputStream, fileSize, progress, null);
+    }
+
+    /**
+     * 方法描述： 带媒体方式上传文件
+     * @param inputStream 文件流、
+     * @param fileSize 文件大小
+     * @param progress 上传进度
+     * @param pairs 文件媒体类型
+     * @return 上传成功的oid
+     */
+    public String upload(InputStream inputStream, String fileSize, UploadProgress progress, NameValuePair ...pairs) {
+        try {
+            StorageClient1 sc1 = createStorageClient1();
+            String uuid = uuid();
+            NameValuePair[] valuePairs = null;
+            if (pairs != null && pairs.length > 0) {
+                valuePairs = pairs;
+            }
+            long size = 0L;
+            if (Objects.isNull(fileSize)) {
+                size = inputStream.available();
+            } else {
+                size = Long.valueOf(fileSize);
+            }
+            final long finalSize = size;
+            String oid = sc1.upload_file1(null, finalSize, new UploadCallback() {
+                @Override
+                public int send(OutputStream out) throws IOException {
+                    BufferedInputStream bos = new BufferedInputStream(inputStream);
+                    int len = 0;
+                    long current = 0;
+                    byte[] bytes = new byte[SIZE_DATA];
+                    while ((len = bos.read(bytes)) != -1) {
+                        current += len;
+                        out.write(bytes, 0, len);
+                        logger.info("文件上传中，进度{}", current / finalSize);
+                        if (Objects.nonNull(progress)) {
+                            progress.progress(current, finalSize, false, null);
+                        }
+                    }
+                    if (Objects.nonNull(progress)) {
+                        progress.progress(current, finalSize, true, null);
+                    }
+                    return 0;
+                }
+            }, uuid, valuePairs);
+            logger.info("文件上传成功，路径{}", oid);
+            return oid;
+        } catch (IOException e) {
+            logger.error("IOException FastDfsClient异常, {}", e.getMessage());
+            throw new FastDfsClientException("IOException FastDfsClient异常, {}", e);
+        } catch (MyException e) {
+            logger.error("MyException FastDfsClient异常, {}", e.getMessage());
+            throw new FastDfsClientException("MyException FastDfsClient异常, {}", e);
+        } finally {
+            IOUtil.closeQuietly(inputStream);
+        }
     }
 
     @Override
     public String upload(File uploadFile) {
-        return super.upload(uploadFile);
+        return this.upload(uploadFile, null);
     }
 
     @Override
     public String upload(byte[] datas) {
-        return super.upload(datas);
+        return this.upload(datas, (String) null);
     }
 
     @Override
     public String upload(byte[] datas, String subType) {
-        return super.upload(datas, subType);
+        return this.upload(datas, subType, null);
     }
 
     @Override
     public String upload(InputStream inputStream) {
-        return super.upload(inputStream);
+        return this.upload(inputStream, null);
     }
 
     @Override

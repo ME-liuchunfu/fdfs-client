@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="beefa08a-d026-41f0-8fcc-3afdc73e53a3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/xin/spring/bless/fast/exception/FastDfsClientException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xin/spring/bless/fast/conf/StorageType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xin/spring/bless/fast/conf/StorageType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xin/spring/bless/fast/service/impl/FastDfsStorageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xin/spring/bless/fast/service/impl/FastDfsStorageServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xin/spring/bless/fast/service/impl/LocalStorageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xin/spring/bless/fast/service/impl/LocalStorageServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/xin/spring/bless/fast/JwtTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xin/spring/bless/fast/JwtTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/xin/spring/bless/fast/conf/Storage.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/xin/spring/bless/fast/conf/StorageGlobalConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xin/spring/bless/fast/conf/StorageGlobalConfig.class" afterDir="false" />
@@ -105,6 +102,9 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="StructureViewFactory">
+    <option name="ACTIVE_ACTIONS" value=",SHOW_FIELDS,SHOW_NON_PUBLIC" />
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -134,7 +134,8 @@
       <workItem from="1597367476304" duration="4042000" />
       <workItem from="1597990651112" duration="2504000" />
       <workItem from="1598021946239" duration="1639000" />
-      <workItem from="1598023817830" duration="1764000" />
+      <workItem from="1598023817830" duration="2703000" />
+      <workItem from="1598058313246" duration="6671000" />
     </task>
     <task id="LOCAL-00001" summary="LocalStorageServiceImpl is ok">
       <created>1597374044335</created>
@@ -143,7 +144,14 @@
       <option name="project" value="LOCAL" />
       <updated>1597374044335</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="新增fastdfs">
+      <created>1598025631850</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1598025631850</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -164,7 +172,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="LocalStorageServiceImpl is ok" />
-    <option name="LAST_COMMIT_MESSAGE" value="LocalStorageServiceImpl is ok" />
+    <MESSAGE value="新增fastdfs" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增fastdfs" />
   </component>
   <component name="WindowStateProjectService">
     <state x="705" y="178" key="#com.intellij.ide.util.MemberChooser" timestamp="1598023115423">
@@ -172,10 +181,10 @@
     </state>
     <state x="705" y="178" key="#com.intellij.ide.util.MemberChooser/0.0.1440.860@0.0.1440.860" timestamp="1598023115423" />
     <state x="836" y="212" key="#com.intellij.ide.util.MemberChooser/0.0.1707.1027@0.0.1707.1027" timestamp="1596770019950" />
-    <state x="391" y="49" key="CommitChangelistDialog2" timestamp="1597374042163">
+    <state x="391" y="49" key="CommitChangelistDialog2" timestamp="1598025630588">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state x="391" y="49" key="CommitChangelistDialog2/0.0.1440.860@0.0.1440.860" timestamp="1597374042163" />
+    <state x="391" y="49" key="CommitChangelistDialog2/0.0.1440.860@0.0.1440.860" timestamp="1598025630588" />
     <state x="463" y="107" key="CommitChangelistDialog2/0.0.1707.1027@0.0.1707.1027" timestamp="1596784869480" />
     <state x="558" y="205" key="FileChooserDialogImpl" timestamp="1598022871592">
       <screen x="0" y="0" width="1440" height="860" />
@@ -226,14 +235,14 @@
       <screen x="0" y="0" width="1440" height="860" />
     </state>
     <state x="308" y="129" key="SettingsEditor/0.0.1440.860@0.0.1440.860" timestamp="1597991138836" />
-    <state x="406" y="154" key="Vcs.Push.Dialog.v2" timestamp="1597374046573">
+    <state x="406" y="154" key="Vcs.Push.Dialog.v2" timestamp="1598025634007">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state x="406" y="154" key="Vcs.Push.Dialog.v2/0.0.1440.860@0.0.1440.860" timestamp="1597374046573" />
-    <state x="548" y="361" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1598025588937">
+    <state x="406" y="154" key="Vcs.Push.Dialog.v2/0.0.1440.860@0.0.1440.860" timestamp="1598025634007" />
+    <state x="548" y="361" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1598076561587">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state x="548" y="361" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1440.860@0.0.1440.860" timestamp="1598025588937" />
+    <state x="548" y="361" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1440.860@0.0.1440.860" timestamp="1598076561587" />
     <state x="650" y="431" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1707.1027@0.0.1707.1027" timestamp="1596784830094" />
     <state x="711" y="261" width="773" height="600" key="find.popup" timestamp="1596782830369">
       <screen x="0" y="0" width="1707" height="1027" />
