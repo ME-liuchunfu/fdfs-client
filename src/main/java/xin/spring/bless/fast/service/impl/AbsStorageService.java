@@ -2,6 +2,7 @@ package xin.spring.bless.fast.service.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import xin.spring.bless.fast.commons.lang.utils.StringUtils;
 import xin.spring.bless.fast.data.cache.DataCacheMemory;
 import xin.spring.bless.fast.exception.DfsNotSurportException;
 import xin.spring.bless.fast.pojo.StorageInfo;
@@ -82,6 +83,18 @@ public abstract class AbsStorageService implements Storage {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
         Date date = new Date();
         return format.format(date);
+    }
+
+    /**
+     * 方法描述：获取文件名后缀，不包含“.”
+     * @param filename 文件名称
+     * @return 获取成功返回后缀，失败返回null
+     */
+    public String subfix(String filename) {
+        if (StringUtils.isBlank(filename)) {
+            return null;
+        }
+        return filename.substring(filename.lastIndexOf(".") + 1).toLowerCase();
     }
 
     @Override

@@ -150,6 +150,26 @@ public class StorageGlobalConfig {
     }
 
     /**
+     * 方法描述： 建造默认的aliyun oss存储服务配置信息
+     * @return Storage 存储服务
+     */
+    public StorageMap defaultAliyunOssProperties() {
+        StorageMap properties = StorageMap.get();
+        // Endpoint以杭州为例，其它Region请按实际情况填写。
+        String endpoint = "https://oss-cn-hangzhou.aliyuncs.com";
+        // 阿里云主账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM账号进行API访问或日常运维，请登录RAM控制台创建RAM账号。
+        String accessKeyId = "<yourAccessKeyId>";
+        String accessKeySecret = "<yourAccessKeySecret>";
+        String bucketName = "<yourBucketName>";
+        properties.put(StorageType.aliyun_endpoint, endpoint);
+        properties.put(StorageType.aliyun_access_key_id, accessKeyId);
+        properties.put(StorageType.aliyun_access_key_secret, accessKeySecret);
+        properties.put(StorageType.aliyun_bucket_name, bucketName);
+        properties.put(StorageType.SERVER_KEY, StorageType.ALIYUN);
+        return properties;
+    }
+
+    /**
      * 方法描述： 获取当前服务是在那种环境
      * @return i ==> 0 unknow， 1 linux, 2 windows, 3 mac
      */
@@ -167,12 +187,6 @@ public class StorageGlobalConfig {
         }
         return i;
     }
-
-//    public static void main(String[] args) {
-//        //当前系统名称
-//        String OS_NAME = System.getProperty("os.name").toLowerCase(Locale.US);
-//        System.out.println(OS_NAME);
-//    }
 
 }
 

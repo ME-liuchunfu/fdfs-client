@@ -73,7 +73,7 @@ public class FastDfsStorageServiceImpl extends AbsStorageService{
     public String upload(File uploadFile, UploadProgress progress, NameValuePair ...pairs) {
         try {
             StorageClient1 sc1 = createStorageClient1();
-            String uuid = uuid() + uploadFile.getName().substring(uploadFile.getName().lastIndexOf(".")+1).toLowerCase();
+            String uuid = uuid() + subfix(uploadFile.getName());
             NameValuePair[] valuePairs = null;
             if (pairs != null && pairs.length > 0) {
                 valuePairs = pairs;

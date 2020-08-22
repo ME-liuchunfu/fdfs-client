@@ -55,7 +55,7 @@ public class LocalStorageServiceImpl extends AbsStorageService{
     @Override
     public String upload(File uploadFile, UploadProgress progress) {
         // 获取配置信息
-        String subType = uploadFile.getName().substring(uploadFile.getName().lastIndexOf(".")+1).toLowerCase();
+        String subType = subfix(uploadFile.getName());
         Object[] obj = createConfig(subType);
         String parent = ((StorageMap) obj[0]).get(StorageType.LOCAL_PATH_KEY).toString();
         String path = obj[4].toString();

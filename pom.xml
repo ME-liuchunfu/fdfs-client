@@ -17,70 +17,10 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <fastdfs.version>1.27.0.0</fastdfs.version>
+    <qiniu.version>7.2.23</qiniu.version>
+    <aliyun.oss.version>3.8.0</aliyun.oss.version>
+    <qcloud.cos.version>4.4</qcloud.cos.version>
   </properties>
-
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.12</version>
-      <scope>test</scope>
-    </dependency>
-
-    <!-- fastdfs-cli -->
-    <!-- https://mvnrepository.com/artifact/net.oschina.zcx7878/fastdfs-client-java -->
-    <dependency>
-      <groupId>net.oschina.zcx7878</groupId>
-      <artifactId>fastdfs-client-java</artifactId>
-      <version>${fastdfs.version}</version>
-<!--      <scope>compile</scope>-->
-    </dependency>
-
-    <dependency>
-      <groupId>io.jsonwebtoken</groupId>
-      <artifactId>jjwt</artifactId>
-      <version>0.9.1</version>
-    </dependency>
-
-    <!-- https://mvnrepository.com/artifact/com.auth0/java-jwt -->
-<!--    <dependency>-->
-<!--      <groupId>com.auth0</groupId>-->
-<!--      <artifactId>java-jwt</artifactId>-->
-<!--      <version>3.4.0</version>-->
-<!--    </dependency>-->
-    <dependency>
-      <groupId>xin.spring.bless.fast</groupId>
-      <artifactId>commons-lang</artifactId>
-      <version>1.0-SNAPSHOT</version>
-    </dependency>
-
-    <!--只有slf4j-api依赖-->
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>1.7.13</version>
-    </dependency>
-    <!--logback-classic依赖logback-core，会自动级联引入-->
-    <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-      <version>1.2.3</version>
-    </dependency>
-
-    <!--    <dependency>-->
-    <!--      <groupId>org.slf4j</groupId>-->
-    <!--      <artifactId>slf4j-simple</artifactId>-->
-    <!--      <version>1.7.25</version>-->
-    <!--    </dependency>-->
-
-    <dependency>
-      <!-- jsoup HTML parser library @ https://jsoup.org/ -->
-      <groupId>org.jsoup</groupId>
-      <artifactId>jsoup</artifactId>
-      <version>1.13.1</version>
-    </dependency>
-
-  </dependencies>
 
   <build>
     <pluginManagement>
@@ -125,7 +65,6 @@
     </pluginManagement>
   </build>
 
-  <!-- 阿里云云效私服 -->
   <distributionManagement>
     <repository>
       <id>rdc-releases</id>
@@ -136,5 +75,92 @@
       <url>https://repo.rdc.aliyun.com/repository/129899-snapshot-HFfM0P/</url>
     </snapshotRepository>
   </distributionManagement>
+
+  <!-- 阿里云云效私服 -->
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt</artifactId>
+      <version>0.9.1</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.auth0/java-jwt -->
+    <!--    <dependency>-->
+    <!--      <groupId>com.auth0</groupId>-->
+    <!--      <artifactId>java-jwt</artifactId>-->
+    <!--      <version>3.4.0</version>-->
+    <!--    </dependency>-->
+    <dependency>
+      <groupId>xin.spring.bless.fast</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+
+    <!--只有slf4j-api依赖-->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.13</version>
+    </dependency>
+    <!--logback-classic依赖logback-core，会自动级联引入-->
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.2.3</version>
+    </dependency>
+
+    <!--    <dependency>-->
+    <!--      <groupId>org.slf4j</groupId>-->
+    <!--      <artifactId>slf4j-simple</artifactId>-->
+    <!--      <version>1.7.25</version>-->
+    <!--    </dependency>-->
+
+    <dependency>
+      <!-- jsoup HTML parser library @ https://jsoup.org/ -->
+      <groupId>org.jsoup</groupId>
+      <artifactId>jsoup</artifactId>
+      <version>1.13.1</version>
+    </dependency>
+
+    <!-- fastdfs-cli -->
+    <!-- https://mvnrepository.com/artifact/net.oschina.zcx7878/fastdfs-client-java -->
+    <dependency>
+      <groupId>net.oschina.zcx7878</groupId>
+      <artifactId>fastdfs-client-java</artifactId>
+      <version>${fastdfs.version}</version>
+      <!--      <scope>compile</scope>-->
+    </dependency>
+    <!-- oss -->
+    <dependency>
+      <groupId>com.qiniu</groupId>
+      <artifactId>qiniu-java-sdk</artifactId>
+      <version>${qiniu.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.aliyun.oss</groupId>
+      <artifactId>aliyun-sdk-oss</artifactId>
+      <version>${aliyun.oss.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.qcloud</groupId>
+      <artifactId>cos_api</artifactId>
+      <version>${qcloud.cos.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-log4j12</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <!-- oss -->
+
+  </dependencies>
 
 </project>

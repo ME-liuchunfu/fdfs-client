@@ -95,6 +95,27 @@ public interface StorageType {
     String fastdfs_tracker_servers = "fastdfs.tracker_servers";
 
     /**=============== aliyun key =================**/
+
+    /**
+     * Endpoint以杭州为例，其它Region请按实际情况填写。
+     */
+    String aliyun_endpoint = "endpoint";
+    /**
+     * 阿里云主账号AccessKey拥有所有API的访问权限，风险很高。
+     * 强烈建议您创建并使用RAM账号进行API访问或日常运维，请登录RAM控制台创建RAM账号。
+     */
+    String aliyun_access_key_id = "accessKeyId";
+
+    /**
+     * 授权码
+     */
+    String aliyun_access_key_secret = "accessKeySecret";
+
+    /**
+     * 服务包名称
+     */
+    String aliyun_bucket_name = "bucketName";
+
     /**=============== Qcloud key =================**/
     /**=============== Qiniu key =================**/
     /**=============== Baiduyun key =================**/
@@ -119,6 +140,11 @@ public interface StorageType {
      *                      服务地址：
      *                              多服务：     ip:port   ==> 10.0.11.201:22122,10.0.11.202:22122,10.0.11.203:22122
      *                              单服务地址： ip:port   ==> 10.0.11.201:22122
+     *          ALIYUN：                                              aliyun oss存储服务
+     *              endpoint：                                        Endpoint以深圳为例，http://oss-cn-shenzhen.aliyuncs.com
+     *              accessKeyId:                                      accessKeyId阿里云主账号AccessKey拥有所有API的访问权限，风险很高。
+     *              accessKeySecret:                                  授权码
+     *              bucketName：                                      服务资源包名称
      *
      *
      *======================================================================================================================*/
