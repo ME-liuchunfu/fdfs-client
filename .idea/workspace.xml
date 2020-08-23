@@ -2,14 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="beefa08a-d026-41f0-8fcc-3afdc73e53a3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/xin/spring/bless/fast/exception/OssDfsException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xin/spring/bless/fast/conf/StorageGlobalConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xin/spring/bless/fast/conf/StorageGlobalConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xin/spring/bless/fast/conf/StorageType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xin/spring/bless/fast/conf/StorageType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xin/spring/bless/fast/service/impl/AbsStorageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xin/spring/bless/fast/service/impl/AbsStorageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xin/spring/bless/fast/service/impl/AliyunStorageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xin/spring/bless/fast/service/impl/AliyunStorageServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xin/spring/bless/fast/service/impl/FastDfsStorageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xin/spring/bless/fast/service/impl/FastDfsStorageServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xin/spring/bless/fast/service/impl/LocalStorageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xin/spring/bless/fast/service/impl/LocalStorageServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/xin/spring/bless/fast/JwtTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xin/spring/bless/fast/JwtTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/xin/spring/bless/fast/conf/Storage.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/xin/spring/bless/fast/conf/StorageGlobalConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xin/spring/bless/fast/conf/StorageGlobalConfig.class" afterDir="false" />
@@ -141,7 +133,7 @@
       <workItem from="1597990651112" duration="2504000" />
       <workItem from="1598021946239" duration="1639000" />
       <workItem from="1598023817830" duration="2703000" />
-      <workItem from="1598058313246" duration="15359000" />
+      <workItem from="1598058313246" duration="15921000" />
     </task>
     <task id="LOCAL-00001" summary="LocalStorageServiceImpl is ok">
       <created>1597374044335</created>
@@ -164,7 +156,14 @@
       <option name="project" value="LOCAL" />
       <updated>1598076608289</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="实现aliyun oss">
+      <created>1598087783103</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1598087783103</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -186,7 +185,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="LocalStorageServiceImpl is ok" />
     <MESSAGE value="新增fastdfs" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增fastdfs" />
+    <MESSAGE value="实现aliyun oss" />
+    <option name="LAST_COMMIT_MESSAGE" value="实现aliyun oss" />
   </component>
   <component name="WindowStateProjectService">
     <state x="705" y="178" key="#com.intellij.ide.util.MemberChooser" timestamp="1598087123540">
@@ -194,10 +194,10 @@
     </state>
     <state x="705" y="178" key="#com.intellij.ide.util.MemberChooser/0.0.1440.860@0.0.1440.860" timestamp="1598087123540" />
     <state x="836" y="212" key="#com.intellij.ide.util.MemberChooser/0.0.1707.1027@0.0.1707.1027" timestamp="1596770019950" />
-    <state x="391" y="49" key="CommitChangelistDialog2" timestamp="1598076606730">
+    <state x="391" y="49" key="CommitChangelistDialog2" timestamp="1598087781204">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state x="391" y="49" key="CommitChangelistDialog2/0.0.1440.860@0.0.1440.860" timestamp="1598076606730" />
+    <state x="391" y="49" key="CommitChangelistDialog2/0.0.1440.860@0.0.1440.860" timestamp="1598087781204" />
     <state x="463" y="107" key="CommitChangelistDialog2/0.0.1707.1027@0.0.1707.1027" timestamp="1596784869480" />
     <state x="558" y="205" key="FileChooserDialogImpl" timestamp="1598022871592">
       <screen x="0" y="0" width="1440" height="860" />
@@ -249,14 +249,14 @@
       <screen x="0" y="0" width="1440" height="860" />
     </state>
     <state x="308" y="129" key="SettingsEditor/0.0.1440.860@0.0.1440.860" timestamp="1597991138836" />
-    <state x="406" y="154" key="Vcs.Push.Dialog.v2" timestamp="1598076610824">
+    <state x="406" y="154" key="Vcs.Push.Dialog.v2" timestamp="1598087784718">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state x="406" y="154" key="Vcs.Push.Dialog.v2/0.0.1440.860@0.0.1440.860" timestamp="1598076610824" />
-    <state x="548" y="361" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1598087753824">
+    <state x="406" y="154" key="Vcs.Push.Dialog.v2/0.0.1440.860@0.0.1440.860" timestamp="1598087784718" />
+    <state x="548" y="361" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1598153436701">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state x="548" y="361" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1440.860@0.0.1440.860" timestamp="1598087753824" />
+    <state x="548" y="361" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1440.860@0.0.1440.860" timestamp="1598153436701" />
     <state x="650" y="431" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1707.1027@0.0.1707.1027" timestamp="1596784830094" />
     <state x="711" y="261" width="773" height="600" key="find.popup" timestamp="1596782830369">
       <screen x="0" y="0" width="1707" height="1027" />
